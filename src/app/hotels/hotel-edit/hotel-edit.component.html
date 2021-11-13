@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="card-header text-white bg-info">
+       Créer un hotel 
+    </div>
+    <div class="card-body">
+        <form novalidate [formGroup]="hotelform" (ngSubmit)="savehotel()">
+            <div class="form-group row mb-2">
+                <label for="hotelNameId" class="col-md-2 col-form-label">
+                   Nom Hotel 
+                </label>
+                <div class="col-md-8">
+                    <input id ="hotelNameId" type="text" class="form-control" formControlName="hotelName" placeholder="Nom (obligatoire)"/>
+                </div></div>
+                <div class="form-group row mb-2">
+                    <label for="hotelPriceId" class="col-md-2 col-form-label">
+                         Prix 
+                    </label>
+                     <div class="col-md-8">
+                           <input id="hotelPriceId" type="text" class="form-control" placeholder="Prix (obligatoire)" formControlName="hotelprice"/></div>
+                </div>
+                <div class="form-group row mb-2">
+                    <label for="starRatingId" class="col-md-2 col-form-label">
+                        Evaluation 
+                    </label>
+                    <div class="col-md-8">
+                        <input  id ="starRatingId" type="text" class="form-control" placeholder="Evaluation (1-5)" formControlName="starRating"/>
+                    </div></div>
+                    <div class="form-group row mb-2">
+                        <label for="descId" class="col-md-2 col-form-label">
+                            Description
+                        </label>
+                        <div class="col-md-8">
+                            <textarea id="descId" class="form-control" id="description" formControlName="description"></textarea>
+                        </div></div>
+                        <div class="form-group row mb-2">
+                            <div class="offset-md-2 col-md-4">
+                                <button class="btn btn-info mr-3" type="submit">Sauvegarder</button>
+                                <button class="btn btn-outline-secondary mr-3" type="button"  [routerLink]="['/hotels']">Annuler</button>
+                                <button class="btn btn-outline-danger" type="button">Supprimer</button>
+                            </div>
+                        </div>
+        </form>
+    </div>
+</div>
+<pre>
+    {{hotelform.value | json}}
+</pre>

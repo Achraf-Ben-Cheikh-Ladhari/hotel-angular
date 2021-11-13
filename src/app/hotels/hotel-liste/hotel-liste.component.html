@@ -1,0 +1,48 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<div class="container">
+    <h2 *ngIf="hotels && hotels.length > 0" >{{title}}</h2>
+    <button class="btn btn-primary d-flex" (click)="toggleIsNewBadge()">
+        <span class="material-icons">
+    {{showBadge?'visibility_off':'visibility'}}</span>
+       <span class="ml-2"> {{showBadge?'Hide':'View'}} New</span>
+    </button>
+    <hr>
+    <div class="my-2">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="filter">Filtre actuel: </span>
+                <b>{{hotelfiltre}}</b>
+            </div>
+            <div class="col-md-8 form-group">
+                <input type="text" class="form-control" [(ngModel)]="hotelfiltre">
+              <!-- <input type="text" class="form-control" [ngModel]="hotelfiltre" (ngModelChange)="hotelfiltre=$event"> --> 
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-primary" *ngIf="!!receivedRating" >{{receivedRating}}</div>
+<div class="row row-cols-1 row-cols-md-3">
+    <div class="col mb-4" *ngFor="let hotel of filtredHotel">
+        <div class="card">
+            <img src="{{hotel.imageUrl}}" [title]="hotel.hotelName" class="card-img-top" [alt]="hotel.hotelName">
+            <div class="card-body">
+                <h5 class="card-title">{{hotel.hotelName  | uppercase}}</h5>
+                <p class="card-text">{{hotel.description}}</p>
+                <p class="card-text">{{hotel.price | currency:'EUR':'symbol':'1.2-2':'fr'}}</p>
+                <div class="d-flex justify-content-between align-items-baseline">
+                    <app-star-rating [rating]="hotel.rating"
+                    (starRatingClicked)="receiveRatingClicked($event)"></app-star-rating>
+                    <span class="material-icons bg-primary text-white p-2 hover rounded-circle btn"
+                    [routerLink]="['/hotels/edit',hotel.hotelId]">
+                        edit
+                    </span>
+                    <span class="material-icons bg-info text-white p-2 rounded-circle btn"
+                    [routerLink]="['/hotels/detail',hotel.hotelId]">
+                        keyboard_arrow_right
+                    </span>
+                </div>    
+              <span class="badge badge-pill badge-info" *ngIf="showBadge">New</span>
+            </div>
+        </div>
+    </div>
+</div>
